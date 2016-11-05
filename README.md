@@ -13,7 +13,8 @@ se contente d'introduire le concept de **Fragment**. Des liens pour aller plus
 loin sont proposés à la fin du TP.
 
 ## Installation
-1. `git clone` ce dépôt.
+1. `git clone https://github.com/Tydax/m2_android_fragment.git` pour clôner ce
+dépôt.
 2. Dans **Android Studio**, *File* > *New* > *Import Project…*, puis naviguer
 jusqu'à l'emplacement du dossier précédemment cloné.
 3. [Commencer le TP](/tutorial).
