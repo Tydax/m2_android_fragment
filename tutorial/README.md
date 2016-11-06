@@ -20,22 +20,26 @@ création.
 
 ## Détails techniques
 ### Classe
-Étant des portions d’Activity, les Fragments possèdent un cycle de vie similaire.
-Pour créer un Fragment, il suffit de créer une classe héritant de la classe
+Étant des portions d’Activity, les Fragments possèdent un cycle de vie similaire
+. Pour créer un Fragment, il suffit de créer une classe héritant de la classe
 `Fragment`. Il existe également des classes filles de `Fragment` utilisables
 comme classe mère :
 * `DialogFragment` pour afficher une fenêtre de dialogue ;
 * `ListFragment` pour afficher une liste gérée par un adapter, similaire à
 `ListActivity` ;
-* `PreferenceFragment` pour afficher une liste d’objets `Preference`, similaire à
-`PreferenceActivity`.
+* `PreferenceFragment` pour afficher une liste d’objets `Preference`, similaire
+à `PreferenceActivity`.
 
 Pour associer un comportement à des moment-clefs du cycle de vie du Fragment, on
 retrouve des méthodes à surcharger similaires celles présentes dans la classe
 `Activity`, telles que :
-* `onCreate()`, à la création du Fragment;
+* `onCreate()`, à la création du Fragment ;
 * `onCreateView()`, lorsqu’Android dessine l’interface du Fragment ;
-* `onPause()`
+* `onPause()` ;
+* `onStop()` ;
+* `onActivityCreated()` ;
+* etc.
 
+###
 
 [Retour à l'accueil](https://github.com/Tydax/m2_android_fragment)
