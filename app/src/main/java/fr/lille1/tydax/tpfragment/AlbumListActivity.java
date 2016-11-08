@@ -82,7 +82,7 @@ public class AlbumListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             final Album album = Album.TEMPLATE.get(position);
             holder.mItem = album;
-            holder.mIdView.setText(album.getId());
+            holder.mIdView.setText(String.valueOf(album.getId()));
             holder.mContentView.setText(album.getTitle());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
