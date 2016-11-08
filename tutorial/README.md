@@ -80,7 +80,7 @@ dont le nom de classe complet est `fr.lille1.univ.ExempleFragment` :
   android:layout_height="match_parent" />
 ```
 
-Plutôt clair, non ?
+Plutôt clair et simple, non ?
 
 #### De manière programmatique
 Ajouter un Fragment de manière programmatique présente l'énorme avantage de
@@ -101,6 +101,8 @@ fragTrans.add(R.id.exemple_container, exFrag); // Ajout du Fragment
 // On peut faire autant d'opérations sur les Fragments que souhaitées avant de commit
 fragTrans.commit(); // On valide les modifications
 ```
+
+
 
 ## Pour aller plus loin
 Voici quelques liens, notament vers la documentation d'Android, afin d'avoir des
