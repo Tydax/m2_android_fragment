@@ -23,17 +23,6 @@ public class AlbumDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -54,8 +43,8 @@ public class AlbumDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(AlbumDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(AlbumDetailFragment.ARG_ITEM_ID));
+            arguments.putInt(AlbumDetailFragment.ARG_ITEM_ID,
+                    getIntent().getIntExtra(AlbumDetailFragment.ARG_ITEM_ID, 0));
             AlbumDetailFragment fragment = new AlbumDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

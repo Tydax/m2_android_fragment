@@ -15,8 +15,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import fr.lille1.tydax.tpfragment.album.DummyAlbumContent;
+import fr.lille1.tydax.tpfragment.album.Album;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,15 +45,6 @@ public class AlbumListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         View recyclerView = findViewById(R.id.album_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
@@ -67,15 +59,15 @@ public class AlbumListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyAlbumContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(new ArrayList(Album.TEMPLATE.values())));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DummyAlbumContent.DummyItem> mValues;
+        private final List<Album> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DummyAlbumContent.DummyItem> items) {
+        public SimpleItemRecyclerViewAdapter(List<Album> items) {
             mValues = items;
         }
 
@@ -88,16 +80,17 @@ public class AlbumListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            final Album album = Album.TEMPLATE.get(position);
+            holder.mItem = album;
+            holder.mIdView.setText(album.getId());
+            holder.mContentView.setText(album.getTitle());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(AlbumDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        arguments.putInt(AlbumDetailFragment.ARG_ITEM_ID, holder.mItem.getId());
                         AlbumDetailFragment fragment = new AlbumDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -106,7 +99,7 @@ public class AlbumListActivity extends AppCompatActivity {
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, AlbumDetailActivity.class);
-                        intent.putExtra(AlbumDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        intent.putExtra(AlbumDetailFragment.ARG_ITEM_ID, holder.mItem.getId());
 
                         context.startActivity(intent);
                     }
@@ -123,7 +116,7 @@ public class AlbumListActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
-            public DummyAlbumContent.DummyItem mItem;
+            public Album mItem;
 
             public ViewHolder(View view) {
                 super(view);
