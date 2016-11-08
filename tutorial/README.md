@@ -16,7 +16,10 @@ une interface mobile et tablette"](img/01_uifrag.png)
 Un **Fragment** représente une partie comportementale et/ou d’interface
 utilisateur dans un **Activity**. On pourrait les définir comme une portion
 d’**Activity**, vu qu’ils sont obligatoirement liés à une Activity à leur
-création.
+création. Et là où les Fragments présentent un intérêt, c’est qu'ils constituent
+de véritables composants réutilisables à travers l’application vu qu’ils peuvent
+être intégrés comme on le souhaite dans une Activity. C’est cette fonctionnalité
+qui fournit la flexibilité recherchée dans leur design.
 
 ## Détails techniques
 ### Classe
@@ -37,9 +40,30 @@ retrouve des méthodes à surcharger similaires celles présentes dans la classe
 * `onCreateView()`, lorsqu’Android dessine l’interface du Fragment ;
 * `onPause()` ;
 * `onStop()` ;
-* `onActivityCreated()` ;
-* etc.
+* `onActivityCreated()`, etc.
 
-###
+### Layout
+Représentant un élément d’interface utilisateur, on aimerait bien pouvoir lier
+un layout à notre Fragment ! Pour cela, pas le choix, on va devoir le faire en
+programmation, c’est-à-dire directement en Java depuis notre classe Fragment.
+Rien de bien compliqué, il suffit de créer un fichier layout, par exemple
+`exemple_de_fragment.xml`, et depuis la méthode `onCreateView()` de notre
+Fragment, on inflate la vue et on la retourne :
+
+```java
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState) {
+    // Inflate the layout for this fragment
+    return inflater.inflate(R.layout.exemple_de_fragment, container, false);
+}
+```
+
+### L’intégration d’un fragment au sein d’une Activity
+Il est possible d’intégrer un Fragment dans une Activity de deux manières différentes,
+soit en l’intégrant directement dans le layout de l’Activity, soit à l’ajoutant
+de
+#### En configuration
+
 
 [Retour à l'accueil](https://github.com/Tydax/m2_android_fragment)
