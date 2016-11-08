@@ -60,10 +60,52 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 ```
 
 ### L’intégration d’un fragment au sein d’une Activity
-Il est possible d’intégrer un Fragment dans une Activity de deux manières différentes,
-soit en l’intégrant directement dans le layout de l’Activity, soit à l’ajoutant
-de
+Il est possible d’intégrer un Fragment dans une Activity de deux manières
+différentes, soit en le déclarant directement dans le layout de l’Activity, soit
+à l’ajoutant de manière programmatique.
+
 #### En configuration
+L'avantage principal de déclarer le Fragment dans le fichier .xml est qu'on a
+un meilleur aperçu de où il sera placé dans le layout. C'est surtout
+intéressant si on a plusieurs Fragments dans un même layout.
 
+Voici par exemple comment insérer une instance de la classe `ExempleFragment`
+dont le nom de classe complet est `fr.lille1.univ.ExempleFragment` :
 
+```xml
+<fragment
+  android:name="fr.lille1.univ.ExempleFragment"
+  android:id="@+id/fragex1"
+  android:layout_width="0dp"
+  android:layout_height="match_parent" />
+```
+
+Plutôt clair, non ?
+
+#### De manière programmatique
+Ajouter un Fragment de manière programmatique présente l'énorme avantage de
+pouvoir modifier l'interface durant l'exécution. Il est cependant nécessaire
+d'avoir un **ViewGroup** déclaré dans le layout où l'on souhaite ajouter le
+Fragment.
+
+L'ajout de Fragment requiert l'utilisation de **FragmentTransaction**, qui
+représente une action de manipulation de Fragment (ajout, suppression,
+remplacement). Voici un exemple où on ajoute notre `ExempleFragment` précédent
+à une `ViewGroup` dont l'id est `exemple_container` :
+
+```java
+final FragmentManager fragMgr = getFragmentManager();
+final FragmentTransaction fragTrans = fragMgr.beginTransaction();
+final ExempleFragment exFrag = new ExempleFragment();
+fragTrans.add(R.id.exemple_container, exFrag); // Ajout du Fragment
+// On peut faire autant d'opérations sur les Fragments que souhaitées avant de commit
+fragTrans.commit(); // On valide les modifications
+```
+
+## Pour aller plus loin
+Voici quelques liens, notament vers la documentation d'Android, afin d'avoir des
+informations plus complètes sur les Fragments.
+* [EN] [Présentation des Fragments](https://developer.android.com/guide/components/fragments.html)
+* [EN] [Building a Dynamic UI with Fragments](https://developer.android.com/training/basics/fragments/index.html)
+* [EN] [Communicating with Other Fragments](https://developer.android.com/training/basics/fragments/communicating.html)
 [Retour à l'accueil](https://github.com/Tydax/m2_android_fragment)
