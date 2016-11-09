@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -89,9 +91,12 @@ public class AlbumListActivity extends AppCompatActivity {
                         Bundle arguments = new Bundle();
                         arguments.putInt(AlbumDetailFragment.ARG_ITEM_ID, holder.mItem.getId());
 
-                        /*
-                         * Tapez ici votre joli code pour remplacer le Fragment !
-                         */
+                        final FragmentManager fragMger = getSupportFragmentManager();
+                        final FragmentTransaction fragtrans = fragMger.beginTransaction();
+                        final AlbumDetailFragment fragment = new AlbumDetailFragment();
+                        fragment.setArguments(arguments);
+                        fragtrans.replace(R.id.album_detail_container, fragment);
+                        fragtrans.commit();
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, AlbumDetailActivity.class);
