@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Introduction aux Fragments sous Android by Tydax</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Introduction aux Fragments sous Android</h1>
+        <h2></h2>
+        <a href="https://github.com/Tydax/m2_android_fragment" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="introduction-aux-fragments-sous-android" class="anchor" href="#introduction-aux-fragments-sous-android" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction aux Fragments sous Android</h1>
+
+<p><a href="#exercice">Je m'en fiche, je veux aller voir directement l'exercice !</a></p>
+
+<h2>
+<a id="origine-et-définition-des-fragments" class="anchor" href="#origine-et-d%C3%A9finition-des-fragments" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Origine et définition des Fragments</h2>
+
+<p>Pour mieux comprendre l’intérêt des Fragments, étudions leur origine. Les
+Fragments ont été introduits avec la version <em>Honeycomb 3.0</em> d’Android (API 11),
+version introduisant le système Android aux tablettes. Et c’est exactement pour
+ces dernières que les Fragments ont été créés : afin de donner plus de
+flexibilité lors de la création d’interfaces utilisateur Android.</p>
+
+<p>Concrètement, les Fragments donnent la possibilité d’être séparés en plusieurs
+écrans sur mobile et d’être combinés sur un seul écran sur tablette, comme
+illustré ci-dessous :</p>
+
+<p><img src="https://github.com/Tydax/m2_android_fragment/blob/master/tutorial/img/01_uifrag.png?raw=true" alt='Figure illustrant l’utilisation de Fragments dans une UI "Les Fragments dans
+une interface mobile et tablette"'></p>
+
+<p>Un <strong>Fragment</strong> représente une partie comportementale et/ou d’interface
+utilisateur dans un <strong>Activity</strong>. On pourrait les définir comme une portion
+d’<strong>Activity</strong>, vu qu’ils sont obligatoirement liés à une Activity à leur
+création. Et là où les Fragments présentent un intérêt, c’est qu'ils constituent
+de véritables composants réutilisables à travers l’application vu qu’ils peuvent
+être intégrés comme on le souhaite dans une Activity. C’est cette fonctionnalité
+qui fournit la flexibilité recherchée dans leur design.</p>
+
+<h2>
+<a id="détails-techniques" class="anchor" href="#d%C3%A9tails-techniques" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Détails techniques</h2>
+
+<h3>
+<a id="bibliothèque-de-support" class="anchor" href="#biblioth%C3%A8que-de-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bibliothèque de support</h3>
+
+<p>Afin que les appareils tournant sous des versions d'Android antérieure à la 3.0
+(ne riez pas, ça existe), il existe une bibliothèque de support intégrée à
+Android : <code>android.support.v4.app.Fragment</code>.
+<strong>Faites très très attention !</strong> L'existence de cette bibliothèque peut créer
+des conflits dans votre iDE si vous importez la mauvaise version dans votre
+classe ! Et honnêtement, il n'y a rien de plus frustrant que perdre trente
+minutes sur un mauvais import… Donc s'il vous plaît, pensez-y !</p>
+
+<h3>
+<a id="classe" class="anchor" href="#classe" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Classe</h3>
+
+<p>Étant des portions d’Activity, les Fragments possèdent un cycle de vie similaire
+. Pour créer un Fragment, il suffit de créer une classe héritant de la classe
+<code>Fragment</code>. Il existe également des classes filles de <code>Fragment</code> utilisables
+comme classe mère :</p>
+
+<ul>
+<li>
+<code>DialogFragment</code> pour afficher une fenêtre de dialogue ;</li>
+<li>
+<code>ListFragment</code> pour afficher une liste gérée par un adapter, similaire à
+<code>ListActivity</code> ;</li>
+<li>
+<code>PreferenceFragment</code> pour afficher une liste d’objets <code>Preference</code>, similaire
+à <code>PreferenceActivity</code>.</li>
+</ul>
+
+<p>Pour associer un comportement à des moment-clefs du cycle de vie du Fragment, on
+retrouve des méthodes à surcharger similaires celles présentes dans la classe
+<code>Activity</code>, telles que :</p>
+
+<ul>
+<li>
+<code>onCreate()</code>, à la création du Fragment ;</li>
+<li>
+<code>onCreateView()</code>, lorsqu’Android dessine l’interface du Fragment ;</li>
+<li>
+<code>onPause()</code> ;</li>
+<li>
+<code>onStop()</code> ;</li>
+<li>
+<code>onActivityCreated()</code>, etc.</li>
+</ul>
+
+<h3>
+<a id="layout" class="anchor" href="#layout" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Layout</h3>
+
+<p>Représentant un élément d’interface utilisateur, on aimerait bien pouvoir lier
+un layout à notre Fragment ! Pour cela, pas le choix, on va devoir le faire en
+programmation, c’est-à-dire directement en Java depuis notre classe Fragment.
+Rien de bien compliqué, il suffit de créer un fichier layout, par exemple
+<code>exemple_de_fragment.xml</code>, et depuis la méthode <code>onCreateView()</code> de notre
+Fragment, on inflate la vue et on la retourne :</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
+<span class="pl-k">public</span> <span class="pl-smi">View</span> onCreateView(<span class="pl-smi">LayoutInflater</span> inflater, <span class="pl-smi">ViewGroup</span> container,
+                         <span class="pl-smi">Bundle</span> savedInstanceState) {
+    <span class="pl-c">// Inflate the layout for this fragment</span>
+    <span class="pl-k">return</span> inflater<span class="pl-k">.</span>inflate(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>exemple_de_fragment, container, <span class="pl-c1">false</span>);
+}</pre></div>
+
+<h3>
+<a id="lintégration-dun-fragment-au-sein-dune-activity" class="anchor" href="#lint%C3%A9gration-dun-fragment-au-sein-dune-activity" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>L’intégration d’un fragment au sein d’une Activity</h3>
+
+<p>Il est possible d’intégrer un Fragment dans une Activity de deux manières
+différentes, soit en le déclarant directement dans le layout de l’Activity, soit
+à l’ajoutant de manière programmatique.</p>
+
+<h4>
+<a id="en-configuration" class="anchor" href="#en-configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>En configuration</h4>
+
+<p>L'avantage principal de déclarer le Fragment dans le fichier .xml est qu'on a
+un meilleur aperçu de où il sera placé dans le layout. C'est surtout
+intéressant si on a plusieurs Fragments dans un même layout.</p>
+
+<p>Voici par exemple comment insérer une instance de la classe <code>ExempleFragment</code>
+dont le nom de classe complet est <code>fr.lille1.univ.ExempleFragment</code> :</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">fragment</span>
+  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>fr.lille1.univ.ExempleFragment<span class="pl-pds">"</span></span>
+  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>@+id/fragex1<span class="pl-pds">"</span></span>
+  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_width</span>=<span class="pl-s"><span class="pl-pds">"</span>0dp<span class="pl-pds">"</span></span>
+  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_height</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span> /&gt;</pre></div>
+
+<p>Plutôt clair et simple, non ?</p>
+
+<h4>
+<a id="de-manière-programmatique" class="anchor" href="#de-mani%C3%A8re-programmatique" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>De manière programmatique</h4>
+
+<p>Ajouter un Fragment de manière programmatique présente l'énorme avantage de
+pouvoir modifier l'interface durant l'exécution. Il est cependant nécessaire
+d'avoir un <strong>ViewGroup</strong> déclaré dans le layout où l'on souhaite ajouter le
+Fragment.</p>
+
+<p>L'ajout de Fragment requiert l'utilisation de <strong>FragmentTransaction</strong>, qui
+représente une action de manipulation de Fragment (ajout, suppression,
+remplacement). Voici un exemple où on ajoute notre <code>ExempleFragment</code> précédent
+à une <code>ViewGroup</code> dont l'id est <code>exemple_container</code> :</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">final</span> <span class="pl-smi">FragmentManager</span> fragMgr <span class="pl-k">=</span> getFragmentManager();
+<span class="pl-k">final</span> <span class="pl-smi">FragmentTransaction</span> fragTrans <span class="pl-k">=</span> fragMgr<span class="pl-k">.</span>beginTransaction();
+<span class="pl-k">final</span> <span class="pl-smi">ExempleFragment</span> exFrag <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">ExempleFragment</span>();
+fragTrans<span class="pl-k">.</span>add(<span class="pl-smi">R</span><span class="pl-k">.</span>id<span class="pl-k">.</span>exemple_container, exFrag); <span class="pl-c">// Ajout du Fragment</span>
+<span class="pl-c">// On peut faire autant d'opérations sur les Fragments que souhaitées avant de commit</span>
+fragTrans<span class="pl-k">.</span>commit(); <span class="pl-c">// On valide les modifications</span></pre></div>
+
+<p>Sous la bibliothèque de support, on doit faire appel à la méthode
+<code>getSupportFragmentManager()</code>.</p>
+
+<h2>
+<a id="À-vous-de-jouer-" class="anchor" href="#%C3%80-vous-de-jouer-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="exercice"></a>À vous de jouer !</h2>
+
+<p>Ce TP consiste à implémenter une vue à base de Fragments affichant d'une part
+une liste de titres d’albums et d'autre part les détails de l'album sélectionné.
+De façon similaire à l'illustration donnée ci-dessus, on souhaiterait :</p>
+
+<ul>
+<li>
+<strong>dans le cas des mobiles</strong>, afficher la liste sur une première Activity, et
+afficher les détails sur une autre Activity ;</li>
+<li>
+<strong>dans le cas des tablettes</strong>, scinder l'écran en deux, avec la liste à gauche
+et les détails à droite.</li>
+</ul>
+
+<p>Pour des raisons de simplicité (vu que tout le monde n'a pas de tablette),
+on considérera qu'en basculant son mobile en mode paysage l'affichage sera le
+même que sur tablette.</p>
+
+<p>Le projet a été créé sur la base de l'Activity “Master/Details flow” qui fournit
+déjà une implémentation fonctionnelle de Fragment et d'Activity. Je l'ai adapté
+à notre exemple.</p>
+
+<p>La structure est simple : il y a deux Activity (<code>AlbumListActivity</code>, affiche
+la liste d'albums, et <code>AlbumDetailActivity</code>, affiche les détails d'un album).
+Un Fragment <code>AlbumDetailFragment</code> est défini permettant d'afficher les détails
+d'un album.</p>
+
+<p>En mode portrait, <code>AlbumListActivity</code> affichera la liste d'albums,
+et cliquer sur l'un ouvrira <code>AlbumDetailActivity</code> qui contiendra le Fragment
+<code>AlbumDetailFragment</code>.</p>
+
+<p>En mode paysage, <code>AlbumListActivity</code> affichera la liste d'albums et le Fragment
+<code>AlbumDetailFragment</code> à sa droite. Cliquer sur un album de la liste mettra à
+jour le Fragment avec les détails de l'album.</p>
+
+<p>Vous aurez deux portions de code très similaires à implémenter.</p>
+
+<ol>
+<li><p>Dans la méthode <code>onCreate()</code> de la classe <code>AlbumDetailActivity</code>, vous devez
+ajouter une nouvelle instance d'<code>AlbumDetailFragment</code> et l'injecter dans la
+<code>NestedScrollView</code> qui servira alors de container.</p></li>
+<li><p>Dans la méthode <code>onBindViewHolder()</code> de la classe <code>AlbumListActivity</code>, vous
+allez devoir <em>remplacer</em> le contenu de la vue par une nouvelle instance
+d'<code>AlbumDetailFragment</code>.</p></li>
+</ol>
+
+<p>N'oubliez pas de passer le bundle d'arguments défini via la méthode
+<code>setArguments(Bundle)</code> de la classe Fragment ! Ce bundle contient l'identifiant
+de l'album cliqué.</p>
+
+<p><strong>Attention :</strong> j'ai eu la (mauvaise) idée de laisser la compatibilité du projet
+à des vieilles versions d'Android, c'est donc la bibliothèque de support qui est
+utilisée. Faites bien attention à vos imports et à bien utiliser la méthode
+<code>getSupportFragmentManager()</code>.</p>
+
+<p>…</p>
+
+<p>…</p>
+
+<p>… Vous vous en sortez ? Non ?
+Vous pouvez voir la correction sur la branche <code>correction</code>.</p>
+
+<h2>
+<a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conclusion</h2>
+
+<p>Pour résumer, les Fragments sont des portions d'Activity qui peuvent représenter
+une partie de comportement et/ou d'interface et qui sont réinjectables selon les
+souhaits du développeur dans une Activity. Les Fragments peuvent sembler un peu
+étrange à aborder au début, mais leur utilisation permette une bien plus grande
+flexibilité lors de la construction des interfaces sous Android, notamment
+lorsque plusieurs plateformes rentrent en compte.</p>
+
+<h2>
+<a id="pour-aller-plus-loin" class="anchor" href="#pour-aller-plus-loin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pour aller plus loin</h2>
+
+<p>Voici quelques liens, notament vers la documentation d'Android, afin d'avoir des
+informations plus complètes sur les Fragments.</p>
+
+<ul>
+<li>[EN] <a href="https://developer.android.com/guide/components/fragments.html">Présentation des Fragments</a>
+</li>
+<li>[EN] <a href="https://developer.android.com/training/basics/fragments/index.html">Building a Dynamic UI with Fragments</a>
+</li>
+<li>[EN] <a href="https://developer.android.com/training/basics/fragments/communicating.html">Communicating with Other Fragments</a>
+</li>
+</ul>
+
+<p><a href="https://github.com/Tydax/m2_android_fragment">Retour à l'accueil</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Tydax/m2_android_fragment/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Tydax/m2_android_fragment/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Tydax/m2_android_fragment"></a> is maintained by <a href="https://github.com/Tydax">Tydax</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
