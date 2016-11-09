@@ -2,13 +2,9 @@ package fr.lille1.tydax.tpfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 /**
@@ -45,11 +41,10 @@ public class AlbumDetailActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putInt(AlbumDetailFragment.ARG_ITEM_ID,
                     getIntent().getIntExtra(AlbumDetailFragment.ARG_ITEM_ID, 0));
-            AlbumDetailFragment fragment = new AlbumDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.album_detail_container, fragment)
-                    .commit();
+
+            /*
+             * Tapez ici votre joli code pour ajouter le Fragment !
+             */
         }
     }
 

@@ -1,4 +1,5 @@
 # Introduction aux Fragments sous Android
+[Je m'en fiche, je veux aller voir directement l'exercice !](#exercice)
 ## Origine et définition des Fragments
 Pour mieux comprendre l’intérêt des Fragments, étudions leur origine. Les
 Fragments ont été introduits avec la version *Honeycomb 3.0* d’Android (API 11),
@@ -102,7 +103,64 @@ fragTrans.add(R.id.exemple_container, exFrag); // Ajout du Fragment
 fragTrans.commit(); // On valide les modifications
 ```
 
+## <a name="exercice"></a>À vous de jouer !
+Ce TP consiste à implémenter une vue à base de Fragments affichant d'une part
+une liste de titres d’albums et d'autre part les détails de l'album sélectionné.
+De façon similaire à l'illustration donnée ci-dessus, on souhaiterait :
+* **dans le cas des mobiles**, afficher la liste sur une première Activity, et
+afficher les détails sur une autre Activity ;
+* **dans le cas des tablettes**, scinder l'écran en deux, avec la liste à gauche
+et les détails à droite.
 
+Pour des raisons de simplicité (vu que tout le monde n'a pas de tablette),
+on considérera qu'en basculant son mobile en mode paysage l'affichage sera le
+même que sur tablette.
+
+Le projet a été créé sur la base de l'Activity “Master/Details flow” qui fournit
+déjà une implémentation fonctionnelle de Fragment et d'Activity. Je l'ai adapté
+à notre exemple.
+
+La structure est simple : il y a deux Activity (`AlbumListActivity`, affiche
+la liste d'albums, et `AlbumDetailActivity`, affiche les détails d'un album).
+Un Fragment `AlbumDetailFragment` est défini permettant d'afficher les détails
+d'un album.
+
+En mode portrait, `AlbumListActivity` affichera la liste d'albums,
+et cliquer sur l'un ouvrira `AlbumDetailActivity` qui contiendra le Fragment
+`AlbumDetailFragment`.
+
+En mode paysage, `AlbumListActivity` affichera la liste d'albums et le Fragment
+`AlbumDetailFragment` à sa droite. Cliquer sur un album de la liste mettra à
+jour le Fragment avec les détails de l'album.
+
+Vous aurez deux portions de code très similaires à implémenter.
+
+1. Dans la méthode `onCreate()` de la classe `AlbumDetailActivity`, vous devez
+ajouter une nouvelle instance d'`AlbumDetailFragment` et l'injecter dans la
+`NestedScrollView` qui servira alors de container.
+
+2. Dans la méthode `onBindViewHolder()` de la classe `AlbumListActivity`, vous
+allez devoir *remplacer* le contenu de la vue par une nouvelle instance
+d'`AlbumDetailFragment`.
+
+N'oubliez pas de passer le bundle d'arguments défini via la méthode
+`setArguments(Bundle)` de la classe Fragment ! Ce bundle contient l'identifiant
+de l'album cliqué.
+
+…
+
+…
+
+… Vous vous en sortez ? Non ?
+Vous pouvez voir la correction sur la branche `correction`.
+
+## Conclusion
+Pour résumer, les Fragments sont des portions d'Activity qui peuvent représenter
+une partie de comportement et/ou d'interface et qui sont réinjectables selon les
+souhaits du développeur dans une Activity. Les Fragments peuvent sembler un peu
+étrange à aborder au début, mais leur utilisation permette une bien plus grande
+flexibilité lors de la construction des interfaces sous Android, notamment
+lorsque plusieurs plateformes rentrent en compte.
 
 ## Pour aller plus loin
 Voici quelques liens, notament vers la documentation d'Android, afin d'avoir des
@@ -110,4 +168,5 @@ informations plus complètes sur les Fragments.
 * [EN] [Présentation des Fragments](https://developer.android.com/guide/components/fragments.html)
 * [EN] [Building a Dynamic UI with Fragments](https://developer.android.com/training/basics/fragments/index.html)
 * [EN] [Communicating with Other Fragments](https://developer.android.com/training/basics/fragments/communicating.html)
+
 [Retour à l'accueil](https://github.com/Tydax/m2_android_fragment)

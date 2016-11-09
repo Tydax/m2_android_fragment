@@ -7,18 +7,15 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-import fr.lille1.tydax.tpfragment.album.Album;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.lille1.tydax.tpfragment.album.Album;
 
 /**
  * An activity representing a list of Albums. This activity
@@ -91,11 +88,10 @@ public class AlbumListActivity extends AppCompatActivity {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
                         arguments.putInt(AlbumDetailFragment.ARG_ITEM_ID, holder.mItem.getId());
-                        AlbumDetailFragment fragment = new AlbumDetailFragment();
-                        fragment.setArguments(arguments);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.album_detail_container, fragment)
-                                .commit();
+
+                        /*
+                         * Tapez ici votre joli code pour remplacer le Fragment !
+                         */
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, AlbumDetailActivity.class);
