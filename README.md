@@ -17,6 +17,6 @@ loin sont proposés à la fin du TP.
 dépôt.
 2. Dans **Android Studio**, *File* > *New* > *Import Project…*, puis naviguer
 jusqu'à l'emplacement du dossier précédemment cloné.
-3. [Commencer le TP](/tutorial).
+3. [Commencer le TP](https://tydax.github.io/m2_android_fragment/).
 4. ???
 5. PROFIT!!
