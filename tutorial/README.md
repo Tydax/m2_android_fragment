@@ -23,6 +23,15 @@ de véritables composants réutilisables à travers l’application vu qu’ils 
 qui fournit la flexibilité recherchée dans leur design.
 
 ## Détails techniques
+### Bibliothèque de support
+Afin que les appareils tournant sous des versions d'Android antérieure à la 3.0
+(ne riez pas, ça existe), il existe une bibliothèque de support intégrée à
+Android : `android.support.v4.app.Fragment`.
+**Faites très très attention !** L'existence de cette bibliothèque peut créer
+des conflits dans votre iDE si vous importez la mauvaise version dans votre
+classe ! Et honnêtement, il n'y a rien de plus frustrant que perdre trente
+minutes sur un mauvais import… Donc s'il vous plaît, pensez-y !
+
 ### Classe
 Étant des portions d’Activity, les Fragments possèdent un cycle de vie similaire
 . Pour créer un Fragment, il suffit de créer une classe héritant de la classe
@@ -103,6 +112,9 @@ fragTrans.add(R.id.exemple_container, exFrag); // Ajout du Fragment
 fragTrans.commit(); // On valide les modifications
 ```
 
+Sous la bibliothèque de support, on doit faire appel à la méthode
+`getSupportFragmentManager()`.
+
 ## <a name="exercice"></a>À vous de jouer !
 Ce TP consiste à implémenter une vue à base de Fragments affichant d'une part
 une liste de titres d’albums et d'autre part les détails de l'album sélectionné.
@@ -146,6 +158,11 @@ d'`AlbumDetailFragment`.
 N'oubliez pas de passer le bundle d'arguments défini via la méthode
 `setArguments(Bundle)` de la classe Fragment ! Ce bundle contient l'identifiant
 de l'album cliqué.
+
+**Attention :** j'ai eu la (mauvaise) idée de laisser la compatibilité du projet
+à des vieilles versions d'Android, c'est donc la bibliothèque de support qui est
+utilisée. Faites bien attention à vos imports et à bien utiliser la méthode
+`getSupportFragmentManager()`.
 
 …
 
